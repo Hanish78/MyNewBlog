@@ -1,0 +1,28 @@
+{% include 'navbar.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Products</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    
+    {{success}}
+    {% for i in data %}
+    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+        <div class="card-header">Title : {{i.title}}</div>
+        <div class="card-body">
+            <h5 class="card-title">ID : {{i.id}}</h5>
+          <h5 class="card-title">Description : {{i.description}}</h5>
+          <p class="card-text">Author : {{i.author}}</p>
+          <p class="card-text">No_of_Line : {{i.no_of_line}}</p>
+          <a href="/delete/{{ i.id }}"><Button>DELETE</Button></a>
+          <a href="/update/{{ i.id }}"><Button>UPDATE</Button></a>
+        </div>
+      </div>
+
+    {% endfor %}
+    
+</body>
+</html>

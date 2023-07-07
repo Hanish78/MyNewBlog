@@ -1,0 +1,27 @@
+{% include 'navbar.html'%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Form</title>
+   
+<form action="add_blog" method="get">
+    NAME<input type="text" name="name" id=""><br><br>
+    Description<input type="text" name="description" id=""><br><br>
+    Author<input type="text" name="author" id=""><br><br>
+    No_of_Line<input type="number" name="no_of_line" id=""><br><br>
+    <input type="submit" value="submit"><br>
+</form>
+<p style="color:forestgreen">{{response}}</p>
+<form action="delete_blog" method="get"><br><br><br>
+   
+    ID<input type="number" name="id" id=""><br><br>
+    <input type="submit" value="delete">
+    
+</form>
+<p style="color:crimson">{{response1}}</p>
+</body>
+</html>

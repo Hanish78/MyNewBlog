@@ -1,0 +1,23 @@
+{% include 'navbar.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPDATE</title>
+</head>
+<body>
+    <h1>THIS IS UPDATE PAGE</h1>
+    
+    <form action="/update_data/{{info.id}}" method="POST">
+        NAME<input type="text" name="name" value="{{info.title}}" id=""><br><br>
+        Description<input type="text" name="description" value="{{info.description}}" id=""><br><br>
+        Author<input type="text" name="author" value="{{info.author}}" id=""><br><br>
+        No_of_Line<input type="number" name="no_of_line" value="{{info.no_of_line}}" id=""><br><br>
+        <input type="submit" value="UPDATE"><br>
+        {% csrf_token %}
+    </form>
+
+</body>
+</html>
