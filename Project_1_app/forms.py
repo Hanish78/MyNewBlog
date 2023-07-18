@@ -15,4 +15,4 @@ class ModelsDemoForm(forms.ModelForm):
         model = BlogContent
  
         # specify fields to be used
-        fields = '__all__'
+        fields = ["title", "description", "no_of_line", "image"]

@@ -6,11 +6,15 @@
     <title>Document</title>
 </head>
 <body>
+    {% if user.is_authenticated %}
     <form method="POST" enctype="multipart/form-data">
         {{form.as_p}}
         {% csrf_token %}
         <button type="submit" class="btn btn-success">SUBMIT</button>
     </form>
+    {% else %}
+    <p>PLEASE LOGIN FIRST...!</p>
+    {% endif %}
 
     
     {{success}}

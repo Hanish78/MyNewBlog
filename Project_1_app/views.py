@@ -21,7 +21,7 @@ def addBlogHandler(request):
     if request.GET.get('name'):
         title_r = request.GET.get('name')
         description_r = request.GET.get('description')
-        author_r = request.GET.get('author')
+        author_r = request.user
         no_of_line_r = request.GET.get('no_of_line')
 
         obj = BlogContent(title = title_r, description = description_r, author = author_r, no_of_line = no_of_line_r)
