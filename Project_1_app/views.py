@@ -4,6 +4,7 @@ from .models import BlogContent
 from .forms import TestForm
 from .forms import ModelsDemoForm
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -50,19 +51,32 @@ def ModelsForm(request):
     success = ''
     form = ModelsDemoForm(request.POST, request.FILES or None)
     if form.is_valid():
+        obj = form.save(commit=False)
+        obj.author = request.user
+        print(request.user) 
         form.save()
         success = 'data saved Successfully'
     # add the dictionary during initialization
     context = {'form': form, 'success': success}
     return render(request, "ModelsForm.html", context)
 
+@login_required(login_url="/admin")
 def deleteblog(request, id):
-    BlogContent.objects.get(pk=id).delete()
-    success = 'Successfully deleted Item'
+    obj = BlogContent.objects.get(id=id)
+    if obj.author == request.user:
+        BlogContent.objects.get(pk=id).delete()
+        success = 'Successfully deleted the blog'
+    else:
+        success = f"You cannot delete this blog author is {obj.author}"
     return render(request, 'blogs.html', {'success': success})
 
+@login_required(login_url="/admin")
 def updateblog(request, id):
     obj = BlogContent.objects.get(id = id)
+    if obj.author == request.user:
+        pass
+    else:
+        return HttpResponse("Can not edit this")
     return render(request, 'update.html', {"info":obj})
 
 def updatedata(request, id):
@@ -70,7 +84,7 @@ def updatedata(request, id):
     c_id = id
     c_title = request.POST.get('name')
     c_description = request.POST.get('description')
-    c_author = request.POST.get('author')
+    c_author = request.user
     c_no_of_line = request.POST.get('no_of_line')
 
     obj = get_object_or_404(BlogContent, id = c_id)
